@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import sys
 import time
 
 runtime_seconds = 300
@@ -15,5 +16,7 @@ for result in range(1, result_count + 1):
         print('  Line {line}'.format(line=line))
 
     print()
+
+    sys.stdout.flush()
 
     time.sleep(sleep_seconds)

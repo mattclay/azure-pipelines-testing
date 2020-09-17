@@ -7,125 +7,125 @@ jobs:
   - job: J001
     displayName: Job J001
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J002
     displayName: Job J002
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J003
     displayName: Job J003
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J004
     displayName: Job J004
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J005
     displayName: Job J005
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J006
     displayName: Job J006
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J007
     displayName: Job J007
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J008
     displayName: Job J008
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J009
     displayName: Job J009
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J010
     displayName: Job J010
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J011
     displayName: Job J011
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J012
     displayName: Job J012
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J013
     displayName: Job J013
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J014
     displayName: Job J014
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J015
     displayName: Job J015
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J016
     displayName: Job J016
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J017
     displayName: Job J017
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J018
     displayName: Job J018
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J019
     displayName: Job J019
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J020
     displayName: Job J020
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J021
     displayName: Job J021
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J022
     displayName: Job J022
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J023
     displayName: Job J023
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J024
     displayName: Job J024
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello
   - job: J025
     displayName: Job J025
     steps:
-      - script: echo Hello $(System.JobDisplayName)
+      - script: ./demo.py
         displayName: Hello

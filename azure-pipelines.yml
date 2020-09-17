@@ -1,19 +1,631 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+pool: Standard_DS1_v2
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+jobs:
+  - job: J001
+    displayName: Job J001
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J002
+    displayName: Job J002
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J003
+    displayName: Job J003
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J004
+    displayName: Job J004
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J005
+    displayName: Job J005
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J006
+    displayName: Job J006
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J007
+    displayName: Job J007
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J008
+    displayName: Job J008
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J009
+    displayName: Job J009
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J010
+    displayName: Job J010
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J011
+    displayName: Job J011
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J012
+    displayName: Job J012
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J013
+    displayName: Job J013
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J014
+    displayName: Job J014
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J015
+    displayName: Job J015
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J016
+    displayName: Job J016
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J017
+    displayName: Job J017
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J018
+    displayName: Job J018
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J019
+    displayName: Job J019
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J020
+    displayName: Job J020
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J021
+    displayName: Job J021
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J022
+    displayName: Job J022
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J023
+    displayName: Job J023
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J024
+    displayName: Job J024
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J025
+    displayName: Job J025
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J026
+    displayName: Job J026
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J027
+    displayName: Job J027
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J028
+    displayName: Job J028
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J029
+    displayName: Job J029
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J030
+    displayName: Job J030
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J031
+    displayName: Job J031
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J032
+    displayName: Job J032
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J033
+    displayName: Job J033
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J034
+    displayName: Job J034
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J035
+    displayName: Job J035
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J036
+    displayName: Job J036
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J037
+    displayName: Job J037
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J038
+    displayName: Job J038
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J039
+    displayName: Job J039
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J040
+    displayName: Job J040
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J041
+    displayName: Job J041
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J042
+    displayName: Job J042
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J043
+    displayName: Job J043
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J044
+    displayName: Job J044
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J045
+    displayName: Job J045
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J046
+    displayName: Job J046
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J047
+    displayName: Job J047
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J048
+    displayName: Job J048
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J049
+    displayName: Job J049
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J050
+    displayName: Job J050
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J051
+    displayName: Job J051
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J052
+    displayName: Job J052
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J053
+    displayName: Job J053
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J054
+    displayName: Job J054
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J055
+    displayName: Job J055
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J056
+    displayName: Job J056
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J057
+    displayName: Job J057
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J058
+    displayName: Job J058
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J059
+    displayName: Job J059
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J060
+    displayName: Job J060
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J061
+    displayName: Job J061
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J062
+    displayName: Job J062
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J063
+    displayName: Job J063
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J064
+    displayName: Job J064
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J065
+    displayName: Job J065
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J066
+    displayName: Job J066
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J067
+    displayName: Job J067
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J068
+    displayName: Job J068
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J069
+    displayName: Job J069
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J070
+    displayName: Job J070
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J071
+    displayName: Job J071
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J072
+    displayName: Job J072
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J073
+    displayName: Job J073
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J074
+    displayName: Job J074
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J075
+    displayName: Job J075
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J076
+    displayName: Job J076
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J077
+    displayName: Job J077
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J078
+    displayName: Job J078
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J079
+    displayName: Job J079
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J080
+    displayName: Job J080
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J081
+    displayName: Job J081
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J082
+    displayName: Job J082
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J083
+    displayName: Job J083
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J084
+    displayName: Job J084
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J085
+    displayName: Job J085
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J086
+    displayName: Job J086
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J087
+    displayName: Job J087
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J088
+    displayName: Job J088
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J089
+    displayName: Job J089
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J090
+    displayName: Job J090
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J091
+    displayName: Job J091
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J092
+    displayName: Job J092
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J093
+    displayName: Job J093
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J094
+    displayName: Job J094
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J095
+    displayName: Job J095
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J096
+    displayName: Job J096
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J097
+    displayName: Job J097
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J098
+    displayName: Job J098
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J099
+    displayName: Job J099
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J100
+    displayName: Job J100
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J101
+    displayName: Job J101
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J102
+    displayName: Job J102
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J103
+    displayName: Job J103
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J104
+    displayName: Job J104
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J105
+    displayName: Job J105
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J106
+    displayName: Job J106
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J107
+    displayName: Job J107
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J108
+    displayName: Job J108
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J109
+    displayName: Job J109
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J110
+    displayName: Job J110
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J111
+    displayName: Job J111
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J112
+    displayName: Job J112
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J113
+    displayName: Job J113
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J114
+    displayName: Job J114
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J115
+    displayName: Job J115
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J116
+    displayName: Job J116
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J117
+    displayName: Job J117
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J118
+    displayName: Job J118
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J119
+    displayName: Job J119
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J120
+    displayName: Job J120
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J121
+    displayName: Job J121
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J122
+    displayName: Job J122
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J123
+    displayName: Job J123
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J124
+    displayName: Job J124
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello
+  - job: J125
+    displayName: Job J125
+    steps:
+      - script: echo Hello $(System.JobDisplayName)
+        displayName: Hello

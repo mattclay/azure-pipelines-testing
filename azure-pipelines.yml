@@ -5,8 +5,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 jobs:
-  - job: test
-    displayName: ""
+  - job:
     strategy:
       matrix:
         One:

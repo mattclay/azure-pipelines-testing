@@ -12,3 +12,7 @@ jobs:
     steps:
       - script: sleep 60
         displayName: Sleep
+  - job: Three
+    steps:
+      - script: sleep 60
+        displayName: Sleep

@@ -3,6 +3,12 @@ trigger:
 
 pool: Experimental
 
-steps:
-  - script: echo Hello, world!
-    displayName: 'Run a one-line script'
+jobs:
+  - job: One
+    steps:
+      - script: sleep 60
+        displayName: Sleep
+  - job: Two
+    steps:
+      - script: sleep 60
+        displayName: Sleep

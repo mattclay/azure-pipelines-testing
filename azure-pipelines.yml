@@ -24,6 +24,8 @@ steps:
   - bash: cat /proc/self/cgroup
   - bash: cat /proc/self/cpuset
   - bash: cat /proc/self/mountinfo
+  - bash: docker inspect $(basename $(cat /proc/self/cpuset))
+    displayName: Show docker inspect
   - bash: docker ps | tee ${AGENT_TEMPDIRECTORY}/containers.txt
     displayName: Show Containers
   - task: PublishPipelineArtifact@1

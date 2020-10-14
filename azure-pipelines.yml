@@ -2,12 +2,11 @@ trigger:
   - master
 
 pool: Standard_DS1_v2
-container: ubuntu:18.04
+container: quay.io/ansible/ansible-base-test-container:1.6.0
 
 steps:
   - checkout: self
     fetchDepth: 100
-  - bash: whoami
   - bash: |
       set -eu
       export TERM=linux

@@ -2,10 +2,20 @@ trigger:
   - master
 
 pool: Standard_DS1_v2
-container: quay.io/ansible/ansible-base-test-container:1.6.0
+container: quay.io/ansible/ubuntu1804-test-container:1.17.0
 
 steps:
   - checkout: self
     fetchDepth: 100
+  - bash: |
+      set -eu
+      export TERM=linux
+      sudo apt-get update -y
+      sudo apt-get install docker.io python3.7 python3-pip -y --no-install-recommends
+      sudo ln -s /usr/bin/python3 /usr/local/bin/python
+      sudo ln -s /usr/bin/pip3 /usr/local/bin/pip
+      sudo chmod 777 /var/run/docker.sock
+      python3 -m pip install cryptography --user --disable-pip-version-check
+    displayName: Prepare Environment
   - bash: docker ps
     displayName: Show Containers

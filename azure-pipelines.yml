@@ -7,6 +7,7 @@ container: ubuntu:18.04
 steps:
   - checkout: self
     fetchDepth: 100
+  - bash: whoami
   - bash: |
       set -eu
       export TERM=linux

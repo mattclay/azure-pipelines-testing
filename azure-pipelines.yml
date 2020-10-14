@@ -1,7 +1,9 @@
 trigger:
   - master
 
-pool: Standard_DS1_v2
+pool:
+  vmImage: ubuntu-latest
+
 container: quay.io/ansible/ubuntu1804-test-container:1.17.0
 
 steps:

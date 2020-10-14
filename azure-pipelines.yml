@@ -19,6 +19,12 @@ steps:
     displayName: Prepare Environment
   - bash: env
     displayName: Show Environment
+  - bash: |
+      set -eux
+      cat /proc/self/cgroup
+      cat /proc/self/cpuset
+      cat /proc/self/mountinfo
+    displayName: Show /proc/self Details
   - bash: docker ps | tee ${AGENT_TEMPDIRECTORY}/containers.txt
     displayName: Show Containers
   - task: PublishPipelineArtifact@1

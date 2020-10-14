@@ -17,5 +17,10 @@ steps:
       sudo chmod 777 /var/run/docker.sock
       python3 -m pip install cryptography --user --disable-pip-version-check
     displayName: Prepare Environment
-  - bash: docker ps
+  - bash: docker ps | tee containers.txt
     displayName: Show Containers
+  - task: PublishPipelineArtifact@1
+    displayName: Publish Artifact
+    inputs:
+      targetPath: containers.txt
+      artifactName: Containers

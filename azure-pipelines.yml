@@ -19,10 +19,10 @@ steps:
     displayName: Prepare Environment
   - bash: env
     displayName: Show Environment
-  - bash: docker ps | tee /tmp/containers.txt
+  - bash: docker ps | tee ${AGENT_TEMPDIRECTORY}/containers.txt
     displayName: Show Containers
   - task: PublishPipelineArtifact@1
     displayName: Publish Artifact
     inputs:
-      targetPath: /tmp/containers.txt
+      targetPath: $(Agent.TempDirectory)/containers.txt
       artifactName: Containers

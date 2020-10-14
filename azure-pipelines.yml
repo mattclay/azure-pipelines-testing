@@ -5,6 +5,6 @@ pool: Standard_DS1_v2
 container: ubuntu:18.04
 
 steps:
-  - script: python --version
+  - script: python3 --version
   - script: docker --version
   - script: docker ps

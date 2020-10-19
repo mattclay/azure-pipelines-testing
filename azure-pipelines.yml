@@ -6,8 +6,7 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+pool: Standard_F2s_v2
 
 steps:
 - script: echo Hello, world!

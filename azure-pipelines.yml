@@ -1,19 +1,27 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- master
+  - master
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  - bash: |
+      mkdir -p '$(Agent.TempDirectory)/coverage/combined/'
+      cd '$(Agent.TempDirectory)/coverage/'
+      touch combined/various=various=various=python-3.8=coverage.combined
+      touch coverage-analyze-targets.json
+    displayName: Mock Coverage Data
+  - task: PublishPipelineArtifact@1
+    displayName: Publish Coverage Data
+    inputs:
+      targetPath: '$(Agent.TempDirectory)/coverage/'
+      artifactName: "Coverage $(System.JobAttempt) $(System.StageDisplayName) $(System.JobDisplayName)"
+  - task: DownloadPipelineArtifact@2
+    displayName: Download Coverage Data
+    inputs:
+      path: coverage/
+      patterns: 'Coverage */combined/*'
+  - bash: |
+      pwd
+      find coverage
+    displayName: Show Coverage Data

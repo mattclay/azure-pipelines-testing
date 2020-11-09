@@ -6,9 +6,9 @@ pool:
 
 steps:
   - bash: |
-      mkdir -p '$(Agent.TempDirectory)/coverage/combined/'
+      mkdir '$(Agent.TempDirectory)/coverage/'
       cd '$(Agent.TempDirectory)/coverage/'
-      touch combined/various=various=various=python-3.8=coverage.combined
+      touch various=various=various=python-3.8=coverage.combined
       touch coverage-analyze-targets.json
     displayName: Mock Coverage Data
   - task: PublishPipelineArtifact@1
@@ -20,7 +20,7 @@ steps:
     displayName: Download Coverage Data
     inputs:
       path: coverage/
-      patterns: 'Coverage */combined/*'
+      patterns: 'Coverage */*=coverage.combined'
   - bash: |
       pwd
       find coverage

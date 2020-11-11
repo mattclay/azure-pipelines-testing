@@ -15,6 +15,9 @@ parameters:
   - name: testFormat
     type: string
     default: "{0}/{1}/{2}"
+  - name: testReplaceVersionDot
+    type: string
+    default: "."
 
 stages:
   - template: test.yml
@@ -24,6 +27,6 @@ stages:
         - ${{ each group in parameters.groups }}:
           - ${{ each target in parameters.targets }}:
             - ${{ each version in target.versions }}:
-              - job: ${{ format(parameters.jobFormat, target.test, version, group) }}
+              - job: ${{ format(parameters.jobFormat, target.test, replace(version, ' ', ''), group) }}
                 name: ${{ format(parameters.nameFormat, target.name, version, group) }}
-                test: ${{ format(parameters.testFormat, target.test, version, group) }}
+                test: ${{ format(parameters.testFormat, target.test, replace(replace(version, ' ', ''), '.', parameters.testReplaceVersionDot), group) }}

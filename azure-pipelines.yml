@@ -94,31 +94,37 @@ stages:
         - 3
         - 4
         - 5
-  - template: templates/test-simple-grouped.yml
+  - template: templates/test-versions-grouped.yml
     parameters:
       stage: Docker
       testFormat: 'linux/{0}/{1}'
+      testReplaceVersionDot: ''
       targets:
-        - name: Alpine 3
-          test: alpine3
-        - name: CentOS 6
-          test: centos6
-        - name: CentOS 7
-          test: centos7
-        - name: CentOS 8
-          test: centos8
-        - name: Fedora 31
-          test: fedora31
-        - name: Fedora 32
-          test: fedora32
-        - name: openSUSE 15 py2
-          test: opensuse15py2
-        - name: openSUSE 15 py3
-          test: opensuse15
-        - name: Ubuntu 16.04
-          test: ubuntu1604
-        - name: Ubuntu 18.04
-          test: ubuntu1804
+        - name: Alpine
+          test: alpine
+          versions:
+            - 3
+        - name: CentOS
+          test: centos
+          versions:
+            - 6
+            - 7
+            - 8
+        - name: Fedora
+          test: fedora
+          versions:
+            - 31
+            - 32
+        - name: openSUSE
+          test: opensuse
+          versions:
+            - 15 py2
+            - 15
+        - name: Ubuntu
+          test: ubuntu
+          versions:
+            - 16.04
+            - 18.04
       groups:
         - 1
         - 2

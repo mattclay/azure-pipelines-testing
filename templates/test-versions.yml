@@ -13,6 +13,9 @@ parameters:
   - name: testFormat
     type: string
     default: "{0}/{1}"
+  - name: testReplaceVersionDot
+    type: string
+    default: "."
 
 stages:
   - template: test-versions-grouped.yml
@@ -22,5 +25,6 @@ stages:
       jobFormat: ${{ parameters.jobFormat }}
       nameFormat: ${{ parameters.nameFormat }}
       testFormat: ${{ parameters.testFormat }}
+      testReplaceVersionDot: ${{ parameters.testReplaceVersionDot }}
       groups:
         - ''

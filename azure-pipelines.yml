@@ -1,19 +1,214 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- master
+  batch: true
+  branches:
+    include:
+      - devel
+      - stable-*
 
-pool:
-  vmImage: 'ubuntu-latest'
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - devel
+      - stable-*
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+schedules:
+  - cron: 0 0 * * *
+    displayName: Nightly
+    always: true
+    branches:
+      include:
+        - devel
+        - stable-*
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+variables:
+  - name: checkoutPath
+    value: ansible
+  - name: fetchDepth
+    value: 100
+
+resources:
+  containers:
+    - container: default
+      image: quay.io/ansible/azure-pipelines-test-container:1.6.0
+
+pool: Standard
+
+stages:
+  - template: templates/versioned.yml
+    parameters:
+      stage: Sanity
+      targets:
+        - name: Test
+          test: sanity
+          versions:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+  - template: templates/versioned.yml
+    parameters:
+      stage: Units
+      targets:
+        - name: Python
+          test: units
+          versions:
+            - 2.6
+            - 2.7
+            - 3.5
+            - 3.6
+            - 3.7
+            - 3.8
+            - 3.9
+  - template: templates/versioned.yml
+    parameters:
+      stage: Windows
+      testFormat: '{0}/{1}/1'
+      targets:
+        - name: 2012
+          test: windows
+          versions:
+            - 2012
+            - 2012-R2
+            - 2016
+            - 2019
+  - template: templates/versioned_grouped.yml
+    parameters:
+      stage: Remote
+      targets:
+        - name: macOS
+          test: macos
+          versions:
+            - 10.15
+        - name: RHEL
+          test: rhel
+          versions:
+            - 7.9
+            - 8.2
+        - name: FreeBSD
+          test: freebsd
+          versions:
+            - 11.1
+            - 12.2
+      groups:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+  - template: templates/grouped.yml
+    parameters:
+      stage: Docker
+      testFormat: 'linux/{0}/{1}'
+      targets:
+        - name: Alpine 3
+          test: alpine3
+        - name: CentOS 6
+          test: centos6
+        - name: CentOS 7
+          test: centos7
+        - name: CentOS 8
+          test: centos8
+        - name: Fedora 31
+          test: fedora31
+        - name: Fedora 32
+          test: fedora32
+        - name: openSUSE 15 py2
+          test: opensuse15py2
+        - name: openSUSE 15 py3
+          test: opensuse15
+        - name: Ubuntu 16.04
+          test: ubuntu1604
+        - name: Ubuntu 18.04
+          test: ubuntu1804
+      groups:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+  - template: templates/versioned.yml
+    parameters:
+      stage: Galaxy
+      testFormat: '{0}/{0}/1'
+      targets:
+        - name: Python
+          test: galaxy
+          versions:
+            - 2.7
+            - 3.6
+  - template: templates/versioned.yml
+    parameters:
+      stage: Generic
+      targets:
+        - name: Python
+          test: generic
+          versions:
+            - 2.7
+            - 3.6
+  - template: templates/simple.yml
+    parameters:
+      stage: Incidental
+      targets:
+        - name: OS X 10.11
+          test: i/osx/10.11
+        - name: RHEL 7.9
+          test: i/rhel/7.9
+        - name: RHEL 8.2
+          test: i/rhel/8.2
+        - name: FreeBSD 11.1
+          test: i/freebsd/11.1
+        - name: FreeBSD 12.2
+          test: i/freebsd/12.2
+        - name: CentOS 6
+          test: i/linux/centos6
+        - name: CentOS 7
+          test: i/linux/centos7
+        - name: CentOS 8
+          test: i/linux/centos8
+        - name: Fedora 31
+          test: i/linux/fedora31
+        - name: Fedora 32
+          test: i/linux/fedora32
+        - name: openSUSE 15 py2
+          test: i/linux/opensuse15py2
+        - name: openSUSE 15 py3
+          test: i/linux/opensuse15
+        - name: Ubuntu 16.04
+          test: i/linux/ubuntu1604
+        - name: Ubuntu 18.04
+          test: i/linux/ubuntu1804
+        - name: Windows 2012
+          test: i/windows/2012
+        - name: Windows 2012-R2
+          test: i/windows/2012-R2
+        - name: Windows 2016
+          test: i/windows/2016
+        - name: Windows 2019
+          test: i/windows/2019
+        - name: IOS csr1000v
+          test: i/ios/csr1000v///
+        - name: VyOS Python 2.7
+          test: i/vyos/1.1.8/2.7
+        - name: VyOS Python 3.6
+          test: i/vyos/1.1.8/3.6
+        - name: AWS Python 2.7
+          test: i/aws/2.7
+        - name: AWS Python 3.6
+          test: i/aws/3.6
+        - name: Cloud
+          test: i/cloud///
+  - stage: Summary
+    condition: succeededOrFailed()
+    dependsOn:
+      - Sanity
+      - Units
+      - Windows
+      - Remote
+      - Docker
+      - Galaxy
+      - Generic
+      - Incidental
+    jobs:
+      - template: templates/coverage.yml

@@ -1,0 +1,34 @@
+parameters:
+  - name: stage
+    type: string
+  - name: targets
+    type: object
+  - name: groups
+    type: object
+  - name: jobFormat
+    type: string
+    default: "{0}_{1}_{2}"
+  - name: nameFormat
+    type: string
+    default: "{0} {1} - {2}"
+  - name: testFormat
+    type: string
+    default: "{0}/{1}/{2}"
+
+stages:
+  - stage: ${{ parameters.stage }}
+    displayName: ${{ parameters.stage }}
+    dependsOn: []
+    jobs:
+      - ${{ each group in parameters.groups }}:
+        - ${{ each target in parameters.targets }}:
+          - ${{ each version in target.versions }}:
+            - job: ${{ replace(replace(replace(format(parameters.jobFormat, target.test, version, group), '/', '_'), '.', '_'), '-', '_') }}
+              displayName: ${{ format(parameters.nameFormat, target.name, version, group) }}
+              container: default
+              workspace:
+                clean: all
+              steps:
+                - template: test.yml
+                  parameters:
+                    test: ${{ format(parameters.testFormat, target.test, version, group) }}

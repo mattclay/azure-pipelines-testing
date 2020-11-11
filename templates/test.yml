@@ -1,12 +1,15 @@
 parameters:
   - name: stage
     type: string
+  - name: name
+    type: string
+    default: ""
   - name: jobs
     type: object
 
 stages:
   - stage: ${{ parameters.stage }}
-    displayName: ${{ parameters.stage }}
+    displayName: ${{ coalesce(parameters.name, parameters.stage) }}
     dependsOn: []
     jobs:
       - ${{ each job in parameters.jobs }}:

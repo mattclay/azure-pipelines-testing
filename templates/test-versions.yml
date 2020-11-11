@@ -1,6 +1,9 @@
 parameters:
   - name: stage
     type: string
+  - name: name
+    type: string
+    default: ""
   - name: targets
     type: object
 
@@ -21,6 +24,7 @@ stages:
   - template: test-versions-grouped.yml
     parameters:
       stage: ${{ parameters.stage }}
+      name: ${{ parameters.name }}
       targets: ${{ parameters.targets }}
       jobFormat: ${{ parameters.jobFormat }}
       nameFormat: ${{ parameters.nameFormat }}

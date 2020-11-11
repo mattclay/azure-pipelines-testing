@@ -97,7 +97,7 @@ stages:
   - template: templates/test-versions-grouped.yml
     parameters:
       stage: Docker
-      testFormat: 'linux/{0}/{1}'
+      testFormat: 'linux/{0}{1}'
       testReplaceVersionDot: ''
       targets:
         - name: Alpine

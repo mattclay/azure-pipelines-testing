@@ -32,7 +32,7 @@ resources:
 pool: Standard
 
 stages:
-  - template: templates/versioned.yml
+  - template: templates/test-versioned.yml
     parameters:
       stage: Sanity
       targets:
@@ -44,7 +44,7 @@ stages:
             - 3
             - 4
             - 5
-  - template: templates/versioned.yml
+  - template: templates/test-versioned.yml
     parameters:
       stage: Units
       targets:
@@ -58,7 +58,7 @@ stages:
             - 3.7
             - 3.8
             - 3.9
-  - template: templates/versioned.yml
+  - template: templates/test-versioned.yml
     parameters:
       stage: Windows
       testFormat: '{0}/{1}/1'
@@ -70,7 +70,7 @@ stages:
             - 2012-R2
             - 2016
             - 2019
-  - template: templates/versioned_grouped.yml
+  - template: templates/test-versioned-grouped.yml
     parameters:
       stage: Remote
       targets:
@@ -94,7 +94,7 @@ stages:
         - 3
         - 4
         - 5
-  - template: templates/grouped.yml
+  - template: templates/test-grouped.yml
     parameters:
       stage: Docker
       testFormat: 'linux/{0}/{1}'
@@ -125,7 +125,7 @@ stages:
         - 3
         - 4
         - 5
-  - template: templates/versioned.yml
+  - template: templates/test-versioned.yml
     parameters:
       stage: Galaxy
       testFormat: '{0}/{1}/1'
@@ -135,7 +135,7 @@ stages:
           versions:
             - 2.7
             - 3.6
-  - template: templates/versioned.yml
+  - template: templates/test-versioned.yml
     parameters:
       stage: Generic
       targets:
@@ -144,7 +144,7 @@ stages:
           versions:
             - 2.7
             - 3.6
-  - template: templates/simple.yml
+  - template: templates/test-simple.yml
     parameters:
       stage: Incidental
       testFormat: 'i/{0}'

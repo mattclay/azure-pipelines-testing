@@ -5,6 +5,7 @@ parameters:
     type: object
   - name: groups
     type: object
+
   - name: jobFormat
     type: string
     default: "{0}_{1}_{2}"
@@ -16,15 +17,13 @@ parameters:
     default: "{0}/{1}/{2}"
 
 stages:
-  - stage: ${{ parameters.stage }}
-    displayName: ${{ parameters.stage }}
-    dependsOn: []
-    jobs:
-      - ${{ each group in parameters.groups }}:
-        - ${{ each target in parameters.targets }}:
-          - ${{ each version in target.versions }}:
-            - template: test.yml
-              parameters:
-                job: ${{ format(parameters.jobFormat, target.test, version, group) }}
+  - template: test.yml
+    parameters:
+      stage: ${{ parameters.stage }}
+      jobs:
+        - ${{ each group in parameters.groups }}:
+          - ${{ each target in parameters.targets }}:
+            - ${{ each version in target.versions }}:
+              - job: ${{ format(parameters.jobFormat, target.test, version, group) }}
                 name: ${{ format(parameters.nameFormat, target.name, version, group) }}
                 test: ${{ format(parameters.testFormat, target.test, version, group) }}

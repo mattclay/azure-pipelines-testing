@@ -3,6 +3,7 @@ parameters:
     type: string
   - name: targets
     type: object
+
   - name: jobFormat
     type: string
     default: "{0}"
@@ -14,13 +15,11 @@ parameters:
     default: "{0}"
 
 stages:
-  - stage: ${{ parameters.stage }}
-    displayName: ${{ parameters.stage }}
-    dependsOn: []
-    jobs:
-      - ${{ each target in parameters.targets }}:
-        - template: test.yml
-          parameters:
-            job: ${{ format(parameters.jobFormat, target.test) }}
+  - template: test.yml
+    parameters:
+      stage: ${{ parameters.stage }}
+      jobs:
+        - ${{ each target in parameters.targets }}:
+          - job: ${{ format(parameters.jobFormat, target.test) }}
             name: ${{ format(parameters.nameFormat, target.name) }}
             test: ${{ format(parameters.testFormat, target.test) }}

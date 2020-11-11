@@ -1,20 +1,23 @@
 parameters:
-  - name: job
+  - name: stage
     type: string
-  - name: name
-    type: string
-  - name: test
-    type: string
+  - name: jobs
+    type: object
 
-jobs:
-  - job: ${{ replace(replace(replace(parameters.job, '/', '_'), '.', '_'), '-', '_') }}
-    displayName: ${{ parameters.name }}
-    container: default
-    workspace:
-      clean: all
-    steps:
-      - checkout: self
-        fetchDepth: ${{variables.fetchDepth}}
-        path: ${{variables.checkoutPath}}
-      - bash: echo ${{ parameters.test }}
-        displayName: Run Tests
+stages:
+  - stage: ${{ parameters.stage }}
+    displayName: ${{ parameters.stage }}
+    dependsOn: []
+    jobs:
+      - ${{ each job in parameters.jobs }}:
+        - job: ${{ replace(replace(replace(job.job, '/', '_'), '.', '_'), '-', '_') }}
+          displayName: ${{ job.name }}
+          container: default
+          workspace:
+            clean: all
+          steps:
+            - checkout: self
+              fetchDepth: ${{variables.fetchDepth}}
+              path: ${{variables.checkoutPath}}
+            - bash: echo ${{ job.test }}
+              displayName: Run Tests

@@ -15,12 +15,12 @@ parameters:
     default: "{0}/{1}"
 
 stages:
-  - template: test.yml
+  - template: test-versioned-grouped.yml
     parameters:
       stage: ${{ parameters.stage }}
-      jobs:
-        - ${{ each target in parameters.targets }}:
-          - ${{ each version in target.versions }}:
-            - job: ${{ format(parameters.jobFormat, target.test, version) }}
-              name: ${{ format(parameters.nameFormat, target.name, version) }}
-              test: ${{ format(parameters.testFormat, target.test, version) }}
+      targets: ${{ parameters.targets }}
+      jobFormat: ${{ parameters.jobFormat }}
+      nameFormat: ${{ parameters.nameFormat }}
+      testFormat: ${{ parameters.testFormat }}
+      groups:
+        - ''

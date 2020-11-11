@@ -94,7 +94,7 @@ stages:
         - 3
         - 4
         - 5
-  - template: templates/test-grouped.yml
+  - template: templates/test-unversioned-grouped.yml
     parameters:
       stage: Docker
       testFormat: 'linux/{0}/{1}'
@@ -144,7 +144,7 @@ stages:
           versions:
             - 2.7
             - 3.6
-  - template: templates/test-simple.yml
+  - template: templates/test-unversioned.yml
     parameters:
       stage: Incidental
       testFormat: 'i/{0}'

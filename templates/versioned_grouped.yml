@@ -23,12 +23,8 @@ stages:
       - ${{ each group in parameters.groups }}:
         - ${{ each target in parameters.targets }}:
           - ${{ each version in target.versions }}:
-            - job: ${{ replace(replace(replace(format(parameters.jobFormat, target.test, version, group), '/', '_'), '.', '_'), '-', '_') }}
-              displayName: ${{ format(parameters.nameFormat, target.name, version, group) }}
-              container: default
-              workspace:
-                clean: all
-              steps:
-                - template: test.yml
-                  parameters:
-                    test: ${{ format(parameters.testFormat, target.test, version, group) }}
+            - template: test.yml
+              parameters:
+                job: ${{ format(parameters.jobFormat, target.test, version, group) }}
+                name: ${{ format(parameters.nameFormat, target.name, version, group) }}
+                test: ${{ format(parameters.testFormat, target.test, version, group) }}

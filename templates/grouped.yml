@@ -22,12 +22,8 @@ stages:
     jobs:
       - ${{ each group in parameters.groups }}:
         - ${{ each target in parameters.targets }}:
-          - job: ${{ replace(replace(replace(format(parameters.jobFormat, target.test, group), '/', '_'), '.', '_'), '-', '_') }}
-            displayName: ${{ format(parameters.nameFormat, target.name, group) }}
-            container: default
-            workspace:
-              clean: all
-            steps:
-              - template: test.yml
-                parameters:
-                  test: ${{ format(parameters.testFormat, target.test, group) }}
+          - template: test.yml
+            parameters:
+              job: ${{ format(parameters.jobFormat, target.test, group) }}
+              name: ${{ format(parameters.nameFormat, target.name, group) }}
+              test: ${{ format(parameters.testFormat, target.test, group) }}

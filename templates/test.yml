@@ -1,10 +1,20 @@
 parameters:
+  - name: job
+    type: string
+  - name: name
+    type: string
   - name: test
     type: string
 
-steps:
-  - checkout: self
-    fetchDepth: ${{variables.fetchDepth}}
-    path: ${{variables.checkoutPath}}
-  - bash: echo ${{ parameters.test }}
-    displayName: Run Tests
+jobs:
+  - job: ${{ replace(replace(replace(parameters.job, '/', '_'), '.', '_'), '-', '_') }}
+    displayName: ${{ parameters.name }}
+    container: default
+    workspace:
+      clean: all
+    steps:
+      - checkout: self
+        fetchDepth: ${{variables.fetchDepth}}
+        path: ${{variables.checkoutPath}}
+      - bash: echo ${{ parameters.test }}
+        displayName: Run Tests

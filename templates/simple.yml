@@ -10,12 +10,8 @@ stages:
     dependsOn: []
     jobs:
       - ${{ each target in parameters.targets }}:
-        - job: ${{ replace(replace(replace(target.test, '/', '_'), '.', '_'), '-', '_') }}
-          displayName: ${{ target.name }}
-          container: default
-          workspace:
-            clean: all
-          steps:
-            - template: test.yml
-              parameters:
-                test: ${{ target.test }}
+        - template: test.yml
+          parameters:
+            job: ${{ target.test }}
+            test: ${{ target.test }}
+            name: ${{ target.name }}

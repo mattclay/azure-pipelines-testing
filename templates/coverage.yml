@@ -8,28 +8,5 @@ jobs:
       - checkout: self
         fetchDepth: ${{variables.fetchDepth}}
         path: ${{variables.checkoutPath}}
-      - task: DownloadPipelineArtifact@2
-        displayName: Download Coverage Data
-        inputs:
-          path: coverage/
-          patterns: 'Coverage */*=coverage.combined'
-      - bash: .azure-pipelines/scripts/combine-coverage.py coverage/ test/results/coverage/
-        displayName: Combine Coverage Data
-      - bash: |
-          set -o pipefail -eu
-          PATH="${PWD}/bin:${PATH}"
-          ansible-test coverage xml --stub --venv --venv-system-site-packages --color -v
-        displayName: Generate Coverage Report
-        condition: gt(variables.CoverageFileCount, 0)
-      - task: PublishCodeCoverageResults@1
-        inputs:
-          codeCoverageTool: Cobertura
-          # Azure Pipelines only accepts a single coverage data file.
-          # That means only Python coverage can be uploaded, not PowerShell or the Python stubs.
-          summaryFileLocation: 'test/results/reports/coverage.xml'
-        displayName: Publish to Azure Pipelines
-        condition: gt(variables.CoverageFileCount, 0)
-      - bash: .azure-pipelines/scripts/codecov.io.sh
-        displayName: Publish to codecov.io
-        condition: gt(variables.CoverageFileCount, 0)
-        continueOnError: true
+      - bash: echo coverage
+        displayName: Coverage

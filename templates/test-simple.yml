@@ -15,7 +15,7 @@ parameters:
     default: "{0}"
 
 stages:
-  - template: test-unversioned-grouped.yml
+  - template: test-simple-grouped.yml
     parameters:
       stage: ${{ parameters.stage }}
       targets: ${{ parameters.targets }}

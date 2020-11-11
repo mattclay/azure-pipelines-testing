@@ -15,7 +15,7 @@ parameters:
     default: "{0}/{1}"
 
 stages:
-  - template: test-versioned-grouped.yml
+  - template: test-versions-grouped.yml
     parameters:
       stage: ${{ parameters.stage }}
       targets: ${{ parameters.targets }}

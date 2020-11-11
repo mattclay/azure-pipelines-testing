@@ -3,6 +3,15 @@ parameters:
     type: string
   - name: targets
     type: object
+  - name: jobFormat
+    type: string
+    default: "{0}"
+  - name: nameFormat
+    type: string
+    default: "{0}"
+  - name: testFormat
+    type: string
+    default: "{0}"
 
 stages:
   - stage: ${{ parameters.stage }}
@@ -12,6 +21,6 @@ stages:
       - ${{ each target in parameters.targets }}:
         - template: test.yml
           parameters:
-            job: ${{ target.test }}
-            test: ${{ target.test }}
-            name: ${{ target.name }}
+            job: ${{ format(parameters.jobFormat, target.test) }}
+            name: ${{ format(parameters.nameFormat, target.name) }}
+            test: ${{ format(parameters.testFormat, target.test) }}

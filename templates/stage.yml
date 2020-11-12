@@ -34,6 +34,6 @@ stages:
         - ${{ if not(eq(length(parameters.groups), 0)) }}:
           - ${{ each group in parameters.groups }}:
             - ${{ each target in parameters.targets }}:
-              - job: ${{ format(parameters.jobFormat + "_{1}", target.test, group) }}
-                name: ${{ format(parameters.nameFormat + " - {1}", target.name, group) }}
-                test: ${{ format(parameters.testFormat + "/{1}", target.test, group) }}
+              - job: ${{ format(join("_", [parameters.jobFormat, "{1}"]), target.test, group) }}
+                name: ${{ format(join(" - ", [parameters.nameFormat, "{1}"]), target.name, group) }}
+                test: ${{ format(join("/", [parameters.testFormat, "{1}"]), target.test, group) }}

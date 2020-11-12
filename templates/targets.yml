@@ -1,10 +1,4 @@
 parameters:
-  - name: stage
-    type: string
-  - name: name
-    type: string
-    default: ""
-
   - name: targets
     type: object
   - name: groups
@@ -32,10 +26,8 @@ parameters:
     default: "{0}/{{1}}"
 
 stages:
-  - template: test.yml
+  - template: jobs.yml
     parameters:
-      stage: ${{ parameters.stage }}
-      name: ${{ parameters.name }}
       jobs:
         - ${{ if eq(length(parameters.groups), 0) }}:
           - ${{ each target in parameters.targets }}:

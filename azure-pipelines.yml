@@ -32,56 +32,66 @@ resources:
 pool: Standard
 
 stages:
-  - template: templates/stage.yml
-    parameters:
-      stage: Sanity_devel
-      name: Sanity devel
-      testFormat: devel/{0}
-      targets:
-        - name: Test
-          test: sanity
-  - template: templates/stage.yml
-    parameters:
-      stage: Sanity_2_10
-      name: Sanity 2.10
-      testFormat: 2.10/{0}
-      targets:
-        - name: Test
-          test: sanity
-  - template: templates/stage.yml
-    parameters:
-      stage: Units_devel
-      name: Units devel
-      testFormat: devel/{0}
-      targets:
-        - name: Python
-          test: units
-  - template: templates/stage.yml
-    parameters:
-      stage: Units_2_10
-      name: Units 2.10
-      testFormat: 2.10/{0}
-      targets:
-        - name: Python
-          test: units
-  - template: templates/stage.yml
-    parameters:
-      stage: Windows_devel
-      name: Windows devel
-      jobFormat: windows_{0}
-      nameFormat: Server {0}
-      testFormat: devel/windows/{0}
-      targets:
-        - name: 2012
-        - name: 2012-R2
-        - name: 2016
-        - name: 2019
-      groups:
-        - 1
-        - 2
-        - 3
-        - 4
-        - 5
+  - stage: Sanity_devel
+    name: Sanity devel
+    dependsOn: []
+    jobs:
+      - template: templates/targets.yml
+        parameters:
+          testFormat: devel/{0}
+          targets:
+            - name: Test
+              test: sanity
+  - stage: Sanity_2_10
+    name: Sanity 2.10
+    dependsOn: []
+    jobs:
+      - template: templates/targets.yml
+        parameters:
+          testFormat: 2.10/{0}
+          targets:
+            - name: Test
+              test: sanity
+  - stage: Units_devel
+    name: Units devel
+    dependsOn: []
+    jobs:
+      - template: templates/targets.yml
+        parameters:
+          testFormat: devel/{0}
+          targets:
+            - name: Python
+              test: units
+  - stage: Units_2_10
+    name: Units 2.10
+    dependsOn: []
+    jobs:
+      - template: templates/targets.yml
+        parameters:
+          testFormat: 2.10/{0}
+          targets:
+            - name: Python
+              test: units
+  - stage: Windows_devel
+    name: Windows devel
+    dependsOn: []
+    jobs:
+      - template: templates/targets.yml
+        parameters:
+          jobFormat: windows_{0}
+          nameFormat: Server {0}
+          testFormat: devel/windows/{0}
+          targets:
+            - name: 2012
+            - name: 2012-R2
+            - name: 2016
+            - name: 2019
+          groups:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
   - stage: Summary
     condition: succeededOrFailed()
     dependsOn:

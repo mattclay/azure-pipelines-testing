@@ -1,0 +1,17 @@
+parameters:
+  - name: jobs
+    type: object
+
+jobs:
+  - ${{ each job in parameters.jobs }}:
+    - job: ${{ replace(replace(replace(job.job, '/', '_'), '.', '_'), '-', '_') }}
+      displayName: ${{ job.name }}
+      container: default
+      workspace:
+        clean: all
+      steps:
+        - checkout: self
+          fetchDepth: ${{variables.fetchDepth}}
+          path: ${{variables.checkoutPath}}
+        - bash: echo ${{ job.test }}
+          displayName: Run Tests

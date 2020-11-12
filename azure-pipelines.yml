@@ -73,13 +73,9 @@ stages:
       testFormat: devel/windows/{0}
       targets:
         - name: 2012
-          test: 2012
         - name: 2012-R2
-          test: 2012-R2
         - name: 2016
-          test: 2016
         - name: 2019
-          test: 2019
       groups:
         - 1
         - 2

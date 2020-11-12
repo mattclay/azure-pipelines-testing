@@ -22,5 +22,5 @@ stages:
             - checkout: self
               fetchDepth: ${{variables.fetchDepth}}
               path: ${{variables.checkoutPath}}
-            - bash: echo ${{ lower(job.test) }}
+            - bash: echo ${{ job.test }}
               displayName: Run Tests

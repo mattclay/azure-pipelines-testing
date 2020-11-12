@@ -27,6 +27,6 @@ stages:
       jobs:
         - ${{ each group in parameters.groups }}:
           - ${{ each target in parameters.targets }}:
-            - job: ${{ format(parameters.jobFormat, coalesce(target.test, target.name), group) }}
+            - job: ${{ format(parameters.jobFormat, target.test, group) }}
               name: ${{ format(parameters.nameFormat, target.name, group) }}
-              test: ${{ format(parameters.testFormat, coalesce(target.test, target.name), group) }}
+              test: ${{ format(parameters.testFormat, target.test, group) }}

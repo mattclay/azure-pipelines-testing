@@ -32,123 +32,57 @@ resources:
 pool: Standard
 
 stages:
-  - template: templates/test-versions.yml
+  - template: templates/test-simple.yml
     parameters:
       stage: Sanity
       targets:
-        - name: Test
-          test: sanity
-          versions:
-            - 1
-            - 2
-            - 3
-            - 4
-            - 5
-  - template: templates/test-versions.yml
+        - name: Test 1
+          test: sanity/1
+        - name: Test 2
+          test: sanity/2
+        - name: Test 3
+          test: sanity/3
+        - name: Test 4
+          test: sanity/4
+        - name: Test 5
+          test: sanity/5
+  - template: templates/test-simple.yml
     parameters:
       stage: Units
       targets:
-        - name: Python
-          test: units
-          versions:
-            - 2.6
-            - 2.7
-            - 3.5
-            - 3.6
-            - 3.7
-            - 3.8
-            - 3.9
-  - template: templates/test-versions.yml
+        - name: Python 2.6
+          test: units/2.6
+        - name: Python 2.7
+          test: units/2.7
+        - name: Python 3.5
+          test: units/3.5
+        - name: Python 3.6
+          test: units/3.6
+        - name: Python 3.7
+          test: units/3.7
+        - name: Python 3.8
+          test: units/3.8
+        - name: Python 3.9
+          test: units/3.9
+  - template: templates/test-simple.yml
     parameters:
       stage: Windows
-      testFormat: '{0}/{1}/1'
+      testFormat: '{0}/1'
       targets:
-        - name: Server
-          test: windows
-          versions:
-            - 2012
-            - 2012-R2
-            - 2016
-            - 2019
-  - template: templates/test-versions-grouped.yml
+        - name: Server 2012
+          test: windows/2012
+        - name: Server 2012-R2
+          test: windows/2012-R2
+        - name: Server 2016
+          test: windows/2016
+        - name: Server 2019
+          test: windows/2019
+  - template: templates/test-simple-grouped.yml
     parameters:
       stage: Remote
       targets:
-        - name: macOS
-          versions:
-            - 10.15
-        - name: RHEL
-          versions:
-            - 7.9
-            - 8.2
-        - name: FreeBSD
-          versions:
-            - 11.1
-            - 12.2
-      groups:
-        - 1
-        - 2
-        - 3
-        - 4
-        - 5
-  - template: templates/test-versions-grouped.yml
-    parameters:
-      stage: Docker
-      testFormat: 'linux/{0}{1}'
-      testReplaceVersionDot: ''
-      targets:
-        - name: Alpine
-          versions:
-            - 3
-        - name: CentOS
-          versions:
-            - 6
-            - 7
-            - 8
-        - name: Fedora
-          versions:
-            - 31
-            - 32
-        - name: openSUSE
-          versions:
-            - 15 py2
-            - 15
-        - name: Ubuntu
-          versions:
-            - 16.04
-            - 18.04
-      groups:
-        - 1
-        - 2
-        - 3
-        - 4
-        - 5
-  - template: templates/test-versions.yml
-    parameters:
-      stage: Galaxy
-      testFormat: '{0}/{1}/1'
-      targets:
-        - name: Python
-          test: galaxy
-          versions:
-            - 2.7
-            - 3.6
-  - template: templates/test-versions.yml
-    parameters:
-      stage: Generic
-      targets:
-        - name: Python
-          test: generic
-          versions:
-            - 2.7
-            - 3.6
-  - template: templates/test-simple.yml
-    parameters:
-      stage: Incidental
-      testFormat: 'i/{0}'
-      targets:
-        - name: OS X 10.11
-          test: osx/10.11
+        - name: macOS 10.15
+          test: macos/10.15
         - name: RHEL 7.9
           test: rhel/7.9
         - name: RHEL 8.2
@@ -157,6 +91,18 @@ stages:
           test: freebsd/11.1
         - name: FreeBSD 12.2
           test: freebsd/12.2
+      groups:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+  - template: templates/test-simple-grouped.yml
+    parameters:
+      stage: Docker
+      targets:
+        - name: Alpine 3
+          test: linux/alpine3
         - name: CentOS 6
           test: linux/centos6
         - name: CentOS 7
@@ -169,32 +115,119 @@ stages:
           test: linux/fedora32
         - name: openSUSE 15 py2
           test: linux/opensuse15py2
-        - name: openSUSE 15
+        - name: openSUSE 15 py3
           test: linux/opensuse15
         - name: Ubuntu 16.04
           test: linux/ubuntu1604
         - name: Ubuntu 18.04
           test: linux/ubuntu1804
-        - name: Windows Server 2012
+      groups:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+  - template: templates/test-simple.yml
+    parameters:
+      stage: Galaxy
+      testFormat: '{0}/1'
+      targets:
+        - name: Python 2.7
+          test: galaxy/2.7
+        - name: Python 3.6
+          test: galaxy/3.6
+  - template: templates/test-simple.yml
+    parameters:
+      stage: Generic
+      testFormat: '{0}/1'
+      targets:
+        - name: Python 2.7
+          test: generic/2.7
+        - name: Python 3.6
+          test: generic/3.6
+  - template: templates/test-simple.yml
+    parameters:
+      stage: Incidental Remote
+      testFormat: i/{0}
+      targets:
+        - name: OS X 10.11
+          test: osx/10.11
+        - name: RHEL 7.9
+          test: rhel/7.9
+        - name: RHEL 8.2
+          test: rhel/8.2
+        - name: FreeBSD 11.1
+          test: freebsd/11.1
+        - name: FreeBSD 12.2
+          test: freebsd/12.2
+  - template: templates/test-simple.yml
+    parameters:
+      stage: Incidental Docker
+      testFormat: i/{0}
+      targets:
+        - name: CentOS 6
+          test: linux/centos6
+        - name: CentOS 7
+          test: linux/centos7
+        - name: CentOS 8
+          test: linux/centos8
+        - name: Fedora 31
+          test: linux/fedora31
+        - name: Fedora 32
+          test: linux/fedora32
+        - name: openSUSE 15 py2
+          test: linux/opensuse15py2
+        - name: openSUSE 15 py3
+          test: linux/opensuse15
+        - name: Ubuntu 16.04
+          test: linux/ubuntu1604
+        - name: Ubuntu 18.04
+          test: linux/ubuntu1804
+  - template: templates/test-simple.yml
+    parameters:
+      stage: Incidental Windows
+      testFormat: i/{0}
+      targets:
+        - name: Server 2012
           test: windows/2012
-        - name: Windows Server 2012-R2
+        - name: Server 2012-R2
           test: windows/2012-R2
-        - name: Windows Server 2016
+        - name: Server 2016
           test: windows/2016
-        - name: Windows Server 2019
+        - name: Server 2019
           test: windows/2019
-        - name: IOS csr1000v
-          test: ios/csr1000v///
-        - name: VyOS Python 2.7
+  - template: templates/test-simple.yml
+    parameters:
+      stage: Incidental IOS
+      testFormat: i/{0}/1
+      targets:
+        - name: Python
+          test: ios
+  - template: templates/test-simple.yml
+    parameters:
+      stage: Incidental VyOS
+      testFormat: i/{0}/1
+      targets:
+        - name: Python 2.7
           test: vyos/1.1.8/2.7
-        - name: VyOS Python 3.6
+        - name: Python 3.6
           test: vyos/1.1.8/3.6
-        - name: AWS Python 2.7
+  - template: templates/test-simple.yml
+    parameters:
+      stage: Incidental AWS
+      testFormat: i/{0}/1
+      targets:
+        - name: Python 2.7
           test: aws/2.7
-        - name: AWS Python 3.6
+        - name: Python 3.6
           test: aws/3.6
-        - name: Cloud
-          test: cloud///
+  - template: templates/test-simple.yml
+    parameters:
+      stage: Incidental Cloud
+      testFormat: i/{0}/1
+      targets:
+        - name: Python
+          test: cloud
   - stage: Summary
     condition: succeededOrFailed()
     dependsOn:
@@ -205,6 +238,12 @@ stages:
       - Docker
       - Galaxy
       - Generic
-      - Incidental
+      - Incidental Remote
+      - Incidental Docker
+      - Incidental Windows
+      - Incidental IOS
+      - Incidental VyOS
+      - Incidental AWS
+      - Incidental Cloud
     jobs:
       - template: templates/coverage.yml

@@ -31,6 +31,6 @@ stages:
         - ${{ each group in parameters.groups }}:
           - ${{ each target in parameters.targets }}:
             - ${{ each version in target.versions }}:
-              - job: ${{ format(parameters.jobFormat, coalesce(target.test, target.name), replace(version, ' ', ''), group) }}
+              - job: ${{ format(parameters.jobFormat, target.test, replace(version, ' ', ''), group) }}
                 name: ${{ format(parameters.nameFormat, target.name, version, group) }}
-                test: ${{ format(parameters.testFormat, coalesce(target.test, target.name), replace(replace(version, ' ', ''), '.', parameters.testReplaceVersionDot), group) }}
+                test: ${{ format(parameters.testFormat, target.test, replace(replace(version, ' ', ''), '.', parameters.testReplaceVersionDot), group) }}

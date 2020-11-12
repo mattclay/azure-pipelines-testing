@@ -206,7 +206,7 @@ stages:
       testFormat: i/{0}/1
       targets:
         - name: Python
-          test: ios
+          test: ios/csr1000v
   - template: templates/test-simple.yml
     parameters:
       stage: Incidental_VyOS

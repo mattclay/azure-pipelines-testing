@@ -68,6 +68,7 @@ stages:
     parameters:
       stage: Windows_devel
       name: Windows devel
+      jobFormat: windows_{0}
       nameFormat: Server {0}
       testFormat: devel/windows/{0}
       targets:

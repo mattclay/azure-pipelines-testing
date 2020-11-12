@@ -68,16 +68,17 @@ stages:
     parameters:
       stage: Windows_devel
       name: Windows devel
-      testFormat: devel/{0}
+      nameFormat: Server {0}
+      testFormat: devel/windows/{0}
       targets:
-        - name: Server 2012
-          test: windows/2012
-        - name: Server 2012-R2
-          test: windows/2012-R2
-        - name: Server 2016
-          test: windows/2016
-        - name: Server 2019
-          test: windows/2019
+        - name: 2012
+          test: 2012
+        - name: 2012-R2
+          test: 2012-R2
+        - name: 2016
+          test: 2016
+        - name: 2019
+          test: 2019
       groups:
         - 1
         - 2

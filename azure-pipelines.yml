@@ -147,7 +147,8 @@ stages:
           test: generic/3.6
   - template: templates/test-simple.yml
     parameters:
-      stage: Incidental Remote
+      stage: Incidental_Remote
+      name: Incidental Remote
       testFormat: i/{0}
       targets:
         - name: OS X 10.11
@@ -162,7 +163,8 @@ stages:
           test: freebsd/12.2
   - template: templates/test-simple.yml
     parameters:
-      stage: Incidental Docker
+      stage: Incidental_Docker
+      name: Incidental Docker
       testFormat: i/{0}
       targets:
         - name: CentOS 6
@@ -185,7 +187,8 @@ stages:
           test: linux/ubuntu1804
   - template: templates/test-simple.yml
     parameters:
-      stage: Incidental Windows
+      stage: Incidental_Windows
+      name: Incidental Windows
       testFormat: i/{0}
       targets:
         - name: Server 2012
@@ -198,14 +201,16 @@ stages:
           test: windows/2019
   - template: templates/test-simple.yml
     parameters:
-      stage: Incidental IOS
+      stage: Incidental_IOS
+      name: Incidental IOS
       testFormat: i/{0}/1
       targets:
         - name: Python
           test: ios
   - template: templates/test-simple.yml
     parameters:
-      stage: Incidental VyOS
+      stage: Incidental_VyOS
+      name: Incidental VyOS
       testFormat: i/{0}/1
       targets:
         - name: Python 2.7
@@ -214,7 +219,8 @@ stages:
           test: vyos/1.1.8/3.6
   - template: templates/test-simple.yml
     parameters:
-      stage: Incidental AWS
+      stage: Incidental_AWS
+      name: Incidental AWS
       testFormat: i/{0}/1
       targets:
         - name: Python 2.7
@@ -223,7 +229,8 @@ stages:
           test: aws/3.6
   - template: templates/test-simple.yml
     parameters:
-      stage: Incidental Cloud
+      stage: Incidental_Cloud
+      name: Incidental Cloud
       testFormat: i/{0}/1
       targets:
         - name: Python
@@ -238,12 +245,12 @@ stages:
       - Docker
       - Galaxy
       - Generic
-      - Incidental Remote
-      - Incidental Docker
-      - Incidental Windows
-      - Incidental IOS
-      - Incidental VyOS
-      - Incidental AWS
-      - Incidental Cloud
+      - Incidental_Remote
+      - Incidental_Docker
+      - Incidental_Windows
+      - Incidental_IOS
+      - Incidental_VyOS
+      - Incidental_AWS
+      - Incidental_Cloud
     jobs:
       - template: templates/coverage.yml

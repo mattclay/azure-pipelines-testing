@@ -4,6 +4,7 @@ parameters:
   - name: name
     type: string
     default: ""
+
   - name: targets
     type: object
   - name: groups
@@ -12,13 +13,23 @@ parameters:
 
   - name: jobFormat
     type: string
-    default: "{0}_{1}"
+    default: "{0}"
   - name: nameFormat
     type: string
-    default: "{0} - {1}"
+    default: "{0}"
   - name: testFormat
     type: string
-    default: "{0}/{1}"
+    default: "{0}"
+
+  - name: jobGroupFormat
+    type: string
+    default: "{0}_{{1}}"
+  - name: nameGroupFormat
+    type: string
+    default: "{0} - {{1}}"
+  - name: testGroupFormat
+    type: string
+    default: "{0}/{{1}}"
 
 stages:
   - template: test.yml
@@ -34,6 +45,6 @@ stages:
         - ${{ if not(eq(length(parameters.groups), 0)) }}:
           - ${{ each group in parameters.groups }}:
             - ${{ each target in parameters.targets }}:
-              - job: ${{ format(join("_", [parameters.jobFormat, "{1}"]), target.test, group) }}
-                name: ${{ format(join(" - ", [parameters.nameFormat, "{1}"]), target.name, group) }}
-                test: ${{ format(join("/", [parameters.testFormat, "{1}"]), target.test, group) }}
+              - job: ${{ format(format(parameters.jobGroupFormat, parameters.jobFormat), target.test, group) }}
+                name: ${{ format(format(parameters.nameGroupFormat, parameters.nameFormat), target.name, group) }}
+                test: ${{ format(format(parameters.testGroupFormat, parameters.testFormat), target.test, group) }}

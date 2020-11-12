@@ -33,7 +33,7 @@ pool: Standard
 
 stages:
   - stage: Sanity_devel
-    name: Sanity devel
+    displayName: Sanity devel
     dependsOn: []
     jobs:
       - template: templates/targets.yml
@@ -43,7 +43,7 @@ stages:
             - name: Test
               test: sanity
   - stage: Sanity_2_10
-    name: Sanity 2.10
+    displayName: Sanity 2.10
     dependsOn: []
     jobs:
       - template: templates/targets.yml
@@ -53,7 +53,7 @@ stages:
             - name: Test
               test: sanity
   - stage: Units_devel
-    name: Units devel
+    displayName: Units devel
     dependsOn: []
     jobs:
       - template: templates/targets.yml
@@ -63,7 +63,7 @@ stages:
             - name: Python
               test: units
   - stage: Units_2_10
-    name: Units 2.10
+    displayName: Units 2.10
     dependsOn: []
     jobs:
       - template: templates/targets.yml
@@ -73,7 +73,7 @@ stages:
             - name: Python
               test: units
   - stage: Windows_devel
-    name: Windows devel
+    displayName: Windows devel
     dependsOn: []
     jobs:
       - template: templates/targets.yml

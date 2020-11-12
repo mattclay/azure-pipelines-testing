@@ -37,58 +37,50 @@ stages:
     jobs:
       - template: templates/targets.yml
         parameters:
-          jobs:
-            - name: Test 1
-              test: sanity/1
-            - name: Test 2
-              test: sanity/2
-            - name: Test 3
-              test: sanity/3
-            - name: Test 4
-              test: sanity/4
-            - name: Test 5
-              test: sanity/5
+          jobFormat: test_{0}
+          nameFormat: Test {0}
+          testFormat: sanity/{0}
+          targets:
+            - test: 1
+            - test: 2
+            - test: 3
+            - test: 4
+            - test: 5
   - stage: Units
     dependsOn: []
     jobs:
       - template: templates/targets.yml
         parameters:
-          jobs:
-            - name: Python 2.6
-              test: units/2.6
-            - name: Python 2.7
-              test: units/2.7
-            - name: Python 3.5
-              test: units/3.5
-            - name: Python 3.6
-              test: units/3.6
-            - name: Python 3.7
-              test: units/3.7
-            - name: Python 3.8
-              test: units/3.8
-            - name: Python 3.9
-              test: units/3.9
+          jobFormat: units_{0}
+          nameFormat: Python {0}
+          testFormat: units/{0}
+          targets:
+            - test: 2.6
+            - test: 2.7
+            - test: 3.5
+            - test: 3.6
+            - test: 3.7
+            - test: 3.8
+            - test: 3.9
   - stage: Windows
     dependsOn: []
     jobs:
       - template: templates/targets.yml
         parameters:
-          testFormat: '{0}/1'
-          jobs:
-            - name: Server 2012
-              test: windows/2012
-            - name: Server 2012-R2
-              test: windows/2012-R2
-            - name: Server 2016
-              test: windows/2016
-            - name: Server 2019
-              test: windows/2019
+          jobFormat: windows_{0}
+          nameFormat: Server {0}
+          testFormat: windows/{0}/1
+          targets:
+            - test: 2012
+            - test: 2012-R2
+            - test: 2016
+            - test: 2019
   - stage: Remote
     dependsOn: []
     jobs:
       - template: templates/targets.yml
         parameters:
-          jobs:
+          targets:
             - name: macOS 10.15
               test: macos/10.15
             - name: RHEL 7.9
@@ -110,7 +102,7 @@ stages:
     jobs:
       - template: templates/targets.yml
         parameters:
-          jobs:
+          targets:
             - name: Alpine 3
               test: linux/alpine3
             - name: CentOS 6
@@ -143,7 +135,7 @@ stages:
       - template: templates/targets.yml
         parameters:
           testFormat: '{0}/1'
-          jobs:
+          targets:
             - name: Python 2.7
               test: galaxy/2.7
             - name: Python 3.6
@@ -154,7 +146,7 @@ stages:
       - template: templates/targets.yml
         parameters:
           testFormat: '{0}/1'
-          jobs:
+          targets:
             - name: Python 2.7
               test: generic/2.7
             - name: Python 3.6
@@ -166,7 +158,7 @@ stages:
       - template: templates/targets.yml
         parameters:
           testFormat: i/{0}
-          jobs:
+          targets:
             - name: OS X 10.11
               test: osx/10.11
             - name: RHEL 7.9
@@ -184,7 +176,7 @@ stages:
       - template: templates/targets.yml
         parameters:
           testFormat: i/{0}
-          jobs:
+          targets:
             - name: CentOS 6
               test: linux/centos6
             - name: CentOS 7
@@ -210,7 +202,7 @@ stages:
       - template: templates/targets.yml
         parameters:
           testFormat: i/{0}
-          jobs:
+          targets:
             - name: Server 2012
               test: windows/2012
             - name: Server 2012-R2
@@ -226,7 +218,7 @@ stages:
       - template: templates/targets.yml
         parameters:
           testFormat: i/{0}/1
-          jobs:
+          targets:
             - name: Python
               test: ios/csr1000v
   - stage: Incidental_VyOS
@@ -236,7 +228,7 @@ stages:
       - template: templates/targets.yml
         parameters:
           testFormat: i/{0}/1
-          jobs:
+          targets:
             - name: Python 2.7
               test: vyos/1.1.8/2.7
             - name: Python 3.6
@@ -248,7 +240,7 @@ stages:
       - template: templates/targets.yml
         parameters:
           testFormat: i/{0}/1
-          jobs:
+          targets:
             - name: Python 2.7
               test: aws/2.7
             - name: Python 3.6
@@ -260,7 +252,7 @@ stages:
       - template: templates/targets.yml
         parameters:
           testFormat: i/{0}/1
-          jobs:
+          targets:
             - name: Python
               test: cloud
   - stage: Summary

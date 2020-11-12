@@ -1,0 +1,39 @@
+parameters:
+  - name: stage
+    type: string
+  - name: name
+    type: string
+    default: ""
+  - name: targets
+    type: object
+  - name: groups
+    type: object
+    default: []
+
+  - name: jobFormat
+    type: string
+    default: "{0}_{1}"
+  - name: nameFormat
+    type: string
+    default: "{0} - {1}"
+  - name: testFormat
+    type: string
+    default: "{0}/{1}"
+
+stages:
+  - template: test.yml
+    parameters:
+      stage: ${{ parameters.stage }}
+      name: ${{ parameters.name }}
+      jobs:
+        - ${{ if eq(length(parameters.groups), 0) }}:
+          - ${{ each target in parameters.targets }}:
+            - job: ${{ format(parameters.jobFormat, target.test) }}
+              name: ${{ format(parameters.nameFormat, target.name) }}
+              test: ${{ format(parameters.testFormat, target.test) }}
+        - ${{ if not(eq(length(parameters.groups), 0)) }}:
+          - ${{ each group in parameters.groups }}:
+            - ${{ each target in parameters.targets }}:
+              - job: ${{ format(parameters.jobFormat + "_{1}", target.test, group) }}
+                name: ${{ format(parameters.nameFormat + " - {1}", target.name, group) }}
+                test: ${{ format(parameters.testFormat + "/{1}", target.test, group) }}

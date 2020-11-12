@@ -32,35 +32,35 @@ resources:
 pool: Standard
 
 stages:
-  - template: templates/test-simple.yml
+  - template: templates/stage.yml
     parameters:
       stage: Sanity_devel
       name: Sanity devel
       targets:
         - name: Test
           test: sanity
-  - template: templates/test-simple.yml
+  - template: templates/stage.yml
     parameters:
       stage: Sanity_2_10
       name: Sanity 2.10
       targets:
         - name: Test
           test: sanity
-  - template: templates/test-simple.yml
+  - template: templates/stage.yml
     parameters:
       stage: Units_devel
       name: Units devel
       targets:
         - name: Python
           test: units
-  - template: templates/test-simple.yml
+  - template: templates/stage.yml
     parameters:
       stage: Units_2_10
       name: Units 2.10
       targets:
         - name: Python
           test: units
-  - template: templates/test-simple-grouped.yml
+  - template: templates/stage.yml
     parameters:
       stage: Windows_devel
       name: Windows devel

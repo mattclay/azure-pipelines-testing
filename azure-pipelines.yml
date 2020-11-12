@@ -20,7 +20,7 @@ schedules:
 
 variables:
   - name: checkoutPath
-    value: ansible
+    value: ansible_collections/community/general
   - name: fetchDepth
     value: 100
 
@@ -34,7 +34,8 @@ pool: Standard
 stages:
   - template: templates/test-simple.yml
     parameters:
-      stage: Sanity
+      stage: Sanity_devel
+      name: Sanity devel
       targets:
         - name: Test 1
           test: sanity/1
@@ -44,11 +45,39 @@ stages:
           test: sanity/3
         - name: Test 4
           test: sanity/4
-        - name: Test 5
-          test: sanity/5
+        - name: Test extra
+          test: sanity/extra
   - template: templates/test-simple.yml
     parameters:
-      stage: Units
+      stage: Sanity_2_10
+      name: Sanity 2.10
+      targets:
+        - name: Test 1
+          test: sanity/1
+        - name: Test 2
+          test: sanity/2
+        - name: Test 3
+          test: sanity/3
+        - name: Test 4
+          test: sanity/4
+  - template: templates/test-simple.yml
+    parameters:
+      stage: Sanity_2_9
+      name: Sanity 2.9
+      targets:
+        - name: Test 1
+          test: sanity/1
+        - name: Test 2
+          test: sanity/2
+        - name: Test 3
+          test: sanity/3
+        - name: Test 4
+          test: sanity/4
+  - template: templates/test-simple.yml
+    parameters:
+      stage: Units_devel
+      name: Units devel
+      testFormat: '{0}/1'
       targets:
         - name: Python 2.6
           test: units/2.6
@@ -66,106 +95,67 @@ stages:
           test: units/3.9
   - template: templates/test-simple.yml
     parameters:
-      stage: Windows
+      stage: Units_2_10
+      name: Units 2.10
       testFormat: '{0}/1'
       targets:
-        - name: Server 2012
-          test: windows/2012
-        - name: Server 2012-R2
-          test: windows/2012-R2
-        - name: Server 2016
-          test: windows/2016
-        - name: Server 2019
-          test: windows/2019
+        - name: Python 2.6
+          test: units/2.6
+        - name: Python 2.7
+          test: units/2.7
+        - name: Python 3.5
+          test: units/3.5
+        - name: Python 3.6
+          test: units/3.6
+        - name: Python 3.7
+          test: units/3.7
+        - name: Python 3.8
+          test: units/3.8
+        - name: Python 3.9
+          test: units/3.9
+  - template: templates/test-simple.yml
+    parameters:
+      stage: Units_2_9
+      name: Units 2.9
+      testFormat: '{0}/1'
+      targets:
+        - name: Python 2.6
+          test: units/2.6
+        - name: Python 2.7
+          test: units/2.7
+        - name: Python 3.5
+          test: units/3.5
+        - name: Python 3.6
+          test: units/3.6
+        - name: Python 3.7
+          test: units/3.7
+        - name: Python 3.8
+          test: units/3.8
   - template: templates/test-simple-grouped.yml
     parameters:
-      stage: Remote
-      targets:
-        - name: macOS 10.15
-          test: macos/10.15
-        - name: RHEL 7.9
-          test: rhel/7.9
-        - name: RHEL 8.2
-          test: rhel/8.2
-        - name: FreeBSD 11.1
-          test: freebsd/11.1
-        - name: FreeBSD 12.2
-          test: freebsd/12.2
-      groups:
-        - 1
-        - 2
-        - 3
-        - 4
-        - 5
-  - template: templates/test-simple-grouped.yml
-    parameters:
-      stage: Docker
-      targets:
-        - name: Alpine 3
-          test: linux/alpine3
-        - name: CentOS 6
-          test: linux/centos6
-        - name: CentOS 7
-          test: linux/centos7
-        - name: CentOS 8
-          test: linux/centos8
-        - name: Fedora 31
-          test: linux/fedora31
-        - name: Fedora 32
-          test: linux/fedora32
-        - name: openSUSE 15 py2
-          test: linux/opensuse15py2
-        - name: openSUSE 15 py3
-          test: linux/opensuse15
-        - name: Ubuntu 16.04
-          test: linux/ubuntu1604
-        - name: Ubuntu 18.04
-          test: linux/ubuntu1804
-      groups:
-        - 1
-        - 2
-        - 3
-        - 4
-        - 5
-  - template: templates/test-simple.yml
-    parameters:
-      stage: Galaxy
-      testFormat: '{0}/1'
-      targets:
-        - name: Python 2.7
-          test: galaxy/2.7
-        - name: Python 3.6
-          test: galaxy/3.6
-  - template: templates/test-simple.yml
-    parameters:
-      stage: Generic
-      testFormat: '{0}/1'
-      targets:
-        - name: Python 2.7
-          test: generic/2.7
-        - name: Python 3.6
-          test: generic/3.6
-  - template: templates/test-simple.yml
-    parameters:
-      stage: Incidental_Remote
-      name: Incidental Remote
-      testFormat: i/{0}
+      stage: Remote_devel
+      name: Remote devel
       targets:
         - name: OS X 10.11
           test: osx/10.11
-        - name: RHEL 7.9
-          test: rhel/7.9
+        - name: macOS 10.15
+          test: macos/10.15
+        - name: RHEL 7.8
+          test: rhel/7.8
         - name: RHEL 8.2
           test: rhel/8.2
         - name: FreeBSD 11.1
           test: freebsd/11.1
-        - name: FreeBSD 12.2
-          test: freebsd/12.2
-  - template: templates/test-simple.yml
+        - name: FreeBSD 12.1
+          test: freebsd/12.1
+      groups:
+        - 1
+        - 2
+        - 3
+  - template: templates/test-simple-grouped.yml
     parameters:
-      stage: Incidental_Docker
-      name: Incidental Docker
-      testFormat: i/{0}
+      stage: Docker_devel
+      name: Docker devel
       targets:
         - name: CentOS 6
           test: linux/centos6
@@ -185,72 +175,107 @@ stages:
           test: linux/ubuntu1604
         - name: Ubuntu 18.04
           test: linux/ubuntu1804
+      groups:
+        - 1
+        - 2
+        - 3
   - template: templates/test-simple.yml
     parameters:
-      stage: Incidental_Windows
-      name: Incidental Windows
-      testFormat: i/{0}
-      targets:
-        - name: Server 2012
-          test: windows/2012
-        - name: Server 2012-R2
-          test: windows/2012-R2
-        - name: Server 2016
-          test: windows/2016
-        - name: Server 2019
-          test: windows/2019
-  - template: templates/test-simple.yml
-    parameters:
-      stage: Incidental_IOS
-      name: Incidental IOS
-      testFormat: i/{0}/1
-      targets:
-        - name: Python
-          test: ios/csr1000v
-  - template: templates/test-simple.yml
-    parameters:
-      stage: Incidental_VyOS
-      name: Incidental VyOS
-      testFormat: i/{0}/1
+      stage: Cloud_devel
+      name: Cloud devel
+      testFormat: '{0}/1'
       targets:
         - name: Python 2.7
-          test: vyos/1.1.8/2.7
+          test: cloud/2.7
         - name: Python 3.6
-          test: vyos/1.1.8/3.6
+          test: cloud/3.6
+  - template: templates/test-simple-grouped.yml
+    parameters:
+      stage: Remote_2_10
+      name: Remote 2.10
+      targets:
+        - name: OS X 10.11
+          test: osx/10.11
+        - name: RHEL 8.2
+          test: rhel/8.2
+        - name: FreeBSD 12.1
+          test: freebsd/12.1
+      groups:
+        - 1
+        - 2
+  - template: templates/test-simple-grouped.yml
+    parameters:
+      stage: Docker_2_10
+      name: Docker 2.10
+      targets:
+        - name: CentOS 8
+          test: linux/centos8
+        - name: Fedora 32
+          test: linux/fedora32
+        - name: openSUSE 15 py3
+          test: linux/opensuse15
+      groups:
+        - 2
+        - 3
   - template: templates/test-simple.yml
     parameters:
-      stage: Incidental_AWS
-      name: Incidental AWS
-      testFormat: i/{0}/1
+      stage: Cloud_2_10
+      name: Cloud 2.10
+      testFormat: '{0}/1'
       targets:
-        - name: Python 2.7
-          test: aws/2.7
         - name: Python 3.6
-          test: aws/3.6
+          test: cloud/3.6
+  - template: templates/test-simple-grouped.yml
+    parameters:
+      stage: Remote_2_9
+      name: Remote 2.9
+      targets:
+        - name: RHEL 8.2
+          test: rhel/8.2
+        - name: FreeBSD 12.0
+          test: freebsd/12.0
+      groups:
+        - 1
+        - 2
+  - template: templates/test-simple-grouped.yml
+    parameters:
+      stage: Docker_2_9
+      name: Docker 2.9
+      targets:
+        - name: CentOS 8
+          test: linux/centos8
+        - name: Fedora 31
+          test: linux/fedora31
+        - name: openSUSE 15 py3
+          test: linux/opensuse15
+      groups:
+        - 2
+        - 3
   - template: templates/test-simple.yml
     parameters:
-      stage: Incidental_Cloud
-      name: Incidental Cloud
-      testFormat: i/{0}/1
+      stage: Cloud_2_9
+      name: Cloud 2.9
+      testFormat: '{0}/1'
       targets:
-        - name: Python
-          test: cloud
+        - name: Python 3.6
+          test: cloud/3.6
   - stage: Summary
     condition: succeededOrFailed()
     dependsOn:
-      - Sanity
-      - Units
-      - Windows
-      - Remote
-      - Docker
-      - Galaxy
-      - Generic
-      - Incidental_Remote
-      - Incidental_Docker
-      - Incidental_Windows
-      - Incidental_IOS
-      - Incidental_VyOS
-      - Incidental_AWS
-      - Incidental_Cloud
+      - Sanity_devel
+      - Sanity_2_10
+      - Sanity_2_9
+      - Units_devel
+      - Units_2_10
+      - Units_2_9
+      - Remote_devel
+      - Docker_devel
+      - Cloud_devel
+      - Remote_2_10
+      - Docker_2_10
+      - Cloud_2_10
+      - Remote_2_9
+      - Docker_2_9
+      - Cloud_2_9
     jobs:
       - template: templates/coverage.yml

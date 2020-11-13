@@ -37,7 +37,6 @@ stages:
     jobs:
       - template: templates/targets.yml
         parameters:
-          jobFormat: test_{0}
           nameFormat: Test {0}
           testFormat: sanity/{0}
           targets:
@@ -51,7 +50,6 @@ stages:
     jobs:
       - template: templates/targets.yml
         parameters:
-          jobFormat: units_{0}
           nameFormat: Python {0}
           testFormat: units/{0}
           targets:
@@ -67,7 +65,6 @@ stages:
     jobs:
       - template: templates/targets.yml
         parameters:
-          jobFormat: windows_{0}
           nameFormat: Server {0}
           testFormat: windows/{0}/1
           targets:
@@ -102,27 +99,28 @@ stages:
     jobs:
       - template: templates/targets.yml
         parameters:
+          testFormat: linux/{0}
           targets:
             - name: Alpine 3
-              test: linux/alpine3
+              test: alpine3
             - name: CentOS 6
-              test: linux/centos6
+              test: centos6
             - name: CentOS 7
-              test: linux/centos7
+              test: centos7
             - name: CentOS 8
-              test: linux/centos8
+              test: centos8
             - name: Fedora 31
-              test: linux/fedora31
+              test: fedora31
             - name: Fedora 32
-              test: linux/fedora32
+              test: fedora32
             - name: openSUSE 15 py2
-              test: linux/opensuse15py2
+              test: opensuse15py2
             - name: openSUSE 15 py3
-              test: linux/opensuse15
+              test: opensuse15
             - name: Ubuntu 16.04
-              test: linux/ubuntu1604
+              test: ubuntu1604
             - name: Ubuntu 18.04
-              test: linux/ubuntu1804
+              test: ubuntu1804
           groups:
             - 1
             - 2
@@ -134,23 +132,21 @@ stages:
     jobs:
       - template: templates/targets.yml
         parameters:
-          testFormat: '{0}/1'
+          nameFormat: Python {0}
+          testFormat: galaxy/{0}/1
           targets:
-            - name: Python 2.7
-              test: galaxy/2.7
-            - name: Python 3.6
-              test: galaxy/3.6
+            - test: 2.7
+            - test: 3.6
   - stage: Generic
     dependsOn: []
     jobs:
       - template: templates/targets.yml
         parameters:
-          testFormat: '{0}/1'
+          nameFormat: Python {0}
+          testFormat: generic/{0}/1
           targets:
-            - name: Python 2.7
-              test: generic/2.7
-            - name: Python 3.6
-              test: generic/3.6
+            - test: 2.7
+            - test: 3.6
   - stage: Incidental_Remote
     displayName: Incidental Remote
     dependsOn: []
@@ -175,86 +171,58 @@ stages:
     jobs:
       - template: templates/targets.yml
         parameters:
-          testFormat: i/{0}
+          testFormat: i/linux/{0}
           targets:
             - name: CentOS 6
-              test: linux/centos6
+              test: centos6
             - name: CentOS 7
-              test: linux/centos7
+              test: centos7
             - name: CentOS 8
-              test: linux/centos8
+              test: centos8
             - name: Fedora 31
-              test: linux/fedora31
+              test: fedora31
             - name: Fedora 32
-              test: linux/fedora32
+              test: fedora32
             - name: openSUSE 15 py2
-              test: linux/opensuse15py2
+              test: opensuse15py2
             - name: openSUSE 15 py3
-              test: linux/opensuse15
+              test: opensuse15
             - name: Ubuntu 16.04
-              test: linux/ubuntu1604
+              test: ubuntu1604
             - name: Ubuntu 18.04
-              test: linux/ubuntu1804
+              test: ubuntu1804
   - stage: Incidental_Windows
     displayName: Incidental Windows
     dependsOn: []
     jobs:
       - template: templates/targets.yml
         parameters:
-          testFormat: i/{0}
+          nameFormat: Server {0}
+          testFormat: i/windows/{0}
           targets:
-            - name: Server 2012
-              test: windows/2012
-            - name: Server 2012-R2
-              test: windows/2012-R2
-            - name: Server 2016
-              test: windows/2016
-            - name: Server 2019
-              test: windows/2019
-  - stage: Incidental_IOS
-    displayName: Incidental IOS
+            - test: 2012
+            - test: 2012-R2
+            - test: 2016
+            - test: 2019
+  - stage: Incidental
     dependsOn: []
     jobs:
       - template: templates/targets.yml
         parameters:
           testFormat: i/{0}/1
           targets:
-            - name: Python
-              test: ios/csr1000v
-  - stage: Incidental_VyOS
-    displayName: Incidental VyOS
-    dependsOn: []
-    jobs:
-      - template: templates/targets.yml
-        parameters:
-          testFormat: i/{0}/1
-          targets:
-            - name: Python 2.7
+            - name: IOS Python
+              test: ios/csr1000v/
+            - name: VyOS Python 2.7
               test: vyos/1.1.8/2.7
-            - name: Python 3.6
+            - name: VyOS Python 3.6
               test: vyos/1.1.8/3.6
-  - stage: Incidental_AWS
-    displayName: Incidental AWS
-    dependsOn: []
-    jobs:
-      - template: templates/targets.yml
-        parameters:
-          testFormat: i/{0}/1
-          targets:
-            - name: Python 2.7
+            - name: AWS Python 2.7
               test: aws/2.7
-            - name: Python 3.6
+            - name: AWS Python 3.6
               test: aws/3.6
-  - stage: Incidental_Cloud
-    displayName: Incidental Cloud
-    dependsOn: []
-    jobs:
-      - template: templates/targets.yml
-        parameters:
-          testFormat: i/{0}/1
-          targets:
-            - name: Python
-              test: cloud
+            - name: Cloud Python
+              test: cloud/
   - stage: Summary
     condition: succeededOrFailed()
     dependsOn:
@@ -268,9 +236,6 @@ stages:
       - Incidental_Remote
       - Incidental_Docker
       - Incidental_Windows
-      - Incidental_IOS
-      - Incidental_VyOS
-      - Incidental_AWS
-      - Incidental_Cloud
+      - Incidental
     jobs:
       - template: templates/coverage.yml

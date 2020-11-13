@@ -5,9 +5,6 @@ parameters:
     type: object
     default: []
 
-  - name: jobFormat
-    type: string
-    default: "{0}"
   - name: nameFormat
     type: string
     default: "{0}"
@@ -15,9 +12,6 @@ parameters:
     type: string
     default: "{0}"
 
-  - name: jobGroupFormat
-    type: string
-    default: "{0}_{{1}}"
   - name: nameGroupFormat
     type: string
     default: "{0} - {{1}}"
@@ -31,12 +25,10 @@ jobs:
       jobs:
         - ${{ if eq(length(parameters.groups), 0) }}:
           - ${{ each target in parameters.targets }}:
-            - job: ${{ format(parameters.jobFormat, coalesce(target.test, target.name)) }}
-              name: ${{ format(parameters.nameFormat, coalesce(target.name, target.test)) }}
+            - name: ${{ format(parameters.nameFormat, coalesce(target.name, target.test)) }}
               test: ${{ format(parameters.testFormat, coalesce(target.test, target.name)) }}
         - ${{ if not(eq(length(parameters.groups), 0)) }}:
           - ${{ each group in parameters.groups }}:
             - ${{ each target in parameters.targets }}:
-              - job: ${{ format(format(parameters.jobGroupFormat, parameters.jobFormat), coalesce(target.test, target.name), group) }}
-                name: ${{ format(format(parameters.nameGroupFormat, parameters.nameFormat), coalesce(target.name, target.test), group) }}
+              - name: ${{ format(format(parameters.nameGroupFormat, parameters.nameFormat), coalesce(target.name, target.test), group) }}
                 test: ${{ format(format(parameters.testGroupFormat, parameters.testFormat), coalesce(target.test, target.name), group) }}

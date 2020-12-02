@@ -4,6 +4,10 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  depthInt: 100
+  depthStr: "100"
+
 jobs:
   - job: normal
     displayName: Normal
@@ -31,6 +35,38 @@ jobs:
     steps:
       - checkout: self
         fetchDepth: 100
+        displayName: Checkout
+      - script: echo Hello World
+        displayName: Hello
+  - job: shallow_100_macro_int
+    displayName: Shallow 100 (macro int)
+    steps:
+      - checkout: self
+        fetchDepth: $(depthInt)
+        displayName: Checkout
+      - script: echo Hello World
+        displayName: Hello
+  - job: shallow_100_macro_str
+    displayName: Shallow 100 (macro str)
+    steps:
+      - checkout: self
+        fetchDepth: $(depthStr)
+        displayName: Checkout
+      - script: echo Hello World
+        displayName: Hello
+  - job: shallow_100_te_int
+    displayName: Shallow 100 (te int)
+    steps:
+      - checkout: self
+        fetchDepth: ${{ variables.depthInt }}
+        displayName: Checkout
+      - script: echo Hello World
+        displayName: Hello
+  - job: shallow_100_te_str
+    displayName: Shallow 100 (te str)
+    steps:
+      - checkout: self
+        fetchDepth: ${{ variables.depthStr }}
         displayName: Checkout
       - script: echo Hello World
         displayName: Hello

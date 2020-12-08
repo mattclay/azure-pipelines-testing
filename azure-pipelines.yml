@@ -5,8 +5,8 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  depthInt: 100
-  depthStr: "100"
+  depthInt: 0
+  depthStr: "0"
 
 jobs:
   - job: normal
